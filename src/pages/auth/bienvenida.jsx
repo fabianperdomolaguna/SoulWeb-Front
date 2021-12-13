@@ -9,7 +9,7 @@ function Mensaje() {
                 <p>SoulWeb es una aplicación de gestión de proyectos diseñada para planificar,
                     supervisar y crear un flujo de trabajo que permita integrar a todos los miembros
                     de un equipo</p>
-                <Link className='button-init' to='/login'>Iniciar</Link>
+                <Link className='button-init' to='../login'>Iniciar</Link>
             </div>
         </div>
     )
