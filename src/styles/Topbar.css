@@ -1,0 +1,94 @@
+.navbar{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+}
+
+.App-title{
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: .5rem;
+}
+
+.navbar-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-links li {
+    list-style: none;
+}
+
+.navbar-links li:hover {
+    background-color: rgb(170, 170, 170);
+}
+
+.navbar-links li a {
+    padding: 1rem;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 3rem;
+}
+
+.showinfo {
+    background: rgba(120, 120, 120, 0.3);
+    color: white;
+    height: calc(100vh - 3.3rem);
+    position: relative;
+}
+
+.showinfo:before {
+    content: '';
+    background: url("../images/login_background.jpg") no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.showinfo .showinfo-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.showinfo h1{
+    font-size: 4rem;
+    margin-block: 0.4rem;
+}
+
+.showinfo p {
+    font-size: 1.4rem;
+    margin-block: 0.4rem;
+}
+
+.button-init {
+    display: inline-block;
+    border: none;
+    background-color: #0a5840;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    border-radius: 99px;
+    text-decoration: none;
+    color: white
+}
+
+.button-init:hover{
+    background-color:gray;
+}
