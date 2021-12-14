@@ -11,6 +11,7 @@ import { nanoid } from 'nanoid';
 import { ObjContext } from 'context/objContext';
 import { useObj } from 'context/objContext';
 import { CREAR_PROYECTO } from 'graphql/proyectos/mutations';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const NuevoProyecto = () => {
   const { form, formData, updateFormData } = useFormData();
@@ -60,7 +61,7 @@ const NuevoProyecto = () => {
           <i className='fas fa-arrow-left' />
         </Link>
       </div>
-      <h1 className='text-2xl font-bold text-gray-900'>Crear Nuevo Proyecto</h1>
+      <h1>Crear Nuevo Proyecto</h1>
       <form ref={form} onChange={updateFormData} onSubmit={submitForm}>
         <Input name='nombre' label='Nombre del Proyecto' required={true} type='text' />
         <Input name='presupuesto' label='Presupuesto del Proyecto' required={true} type='number' />
