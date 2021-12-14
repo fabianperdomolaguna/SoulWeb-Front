@@ -18,7 +18,9 @@ const SidebarLinks = (props) => {
         <SidebarRoute to='/inscripciones' title='Inscripciones' icon='fas fa-marker' />
       </PrivateComponent>
       <SidebarRoute to='/page2' title='Avances' icon='fas fa-tasks' />
+      <PrivateComponent roleList={['ESTUDIANTE', 'LIDER']}>
       <SidebarRoute to={`/infoUser/${props._id}`} title='Inf. Personal' icon='fas fa-info' />
+      </PrivateComponent>
       <Logout />
     </ul>    
     </div>

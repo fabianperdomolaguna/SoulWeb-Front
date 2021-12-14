@@ -28,4 +28,22 @@ const EDITAR_USUARIO = gql`
   }
 `;
 
-export { EDITAR_USUARIO };
+const EDITAR_USUARIO_IND = gql`
+mutation EditarUsuarioInd(
+  $_id: String!, 
+  $correo: String!, 
+  $estado: Enum_EstadoUsuario!, 
+  $rol: Enum_Rol!
+) {
+  editarUsuarioInd(
+    _id: $_id, 
+    correo: $correo, 
+    estado: $estado, 
+    rol: $rol) 
+  {
+    estado
+  }
+}
+`;
+
+export { EDITAR_USUARIO, EDITAR_USUARIO_IND };
