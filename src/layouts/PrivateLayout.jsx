@@ -7,7 +7,7 @@ import { REFRESH_TOKEN } from 'graphql/auth/mutations';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
-const PrivateLayout = () => {
+const PrivateLayout = (props) => {
 
   const navigate = useNavigate()
 
@@ -38,7 +38,7 @@ const PrivateLayout = () => {
 
   return (
     <div>
-      <Sidebar childComponent={<Outlet />}/>
+      <Sidebar childComponent={<Outlet />} _id={props._id}/>
     </div>
   );
 };

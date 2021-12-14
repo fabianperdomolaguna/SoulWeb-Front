@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import PrivateLayout from 'layouts/PrivateLayout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from 'context/userContext';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Inicio from 'pages/inicio';
-import Page2 from 'pages/Page2';
-import IndexCategory1 from 'pages/category1/Index';
-import Category1 from 'pages/category1/CategoryPage1';
-import IndexUsuarios from 'pages/usuarios';
-import EditarUsuario from 'pages/usuarios/editar';
+import { AuthContext } from 'context/authContext';
+import jwt_decode from 'jwt-decode';
 import AuthLayout from 'layouts/AuthLayout';
+import PrivateLayout from 'layouts/PrivateLayout';
+import Bienvenida from 'pages/auth/bienvenida';
 import Register from 'pages/auth/register';
 import Login from 'pages/auth/login';
-import { AuthContext } from 'context/authContext';
+import Inicio from 'pages/inicio';
+import IndexUsuarios from 'pages/usuarios';
+import EditarUsuario from 'pages/usuarios/editar';
+import Page2 from 'pages/Page2';
 import IndexProyectos from 'pages/proyectos/Index';
-import jwt_decode from 'jwt-decode';
-import 'styles/globals.css';
-import 'styles/tabla.css';
 import NuevoProyecto from 'pages/proyectos/NuevoProyecto';
 import IndexInscripciones from 'pages/inscripciones';
-import Bienvenida from 'pages/auth/bienvenida';
+import IndexInfoUsuario from 'pages/infoUsuarios';
 
 const httpLink = createHttpLink({
   uri: 'https://servidor-gql-soulweb.herokuapp.com/graphql',
@@ -77,7 +74,7 @@ function App() {
         <UserContext.Provider value={{ userData, setUserData }}>
           <BrowserRouter>
             <Routes>
-              <Route path='/' element={<PrivateLayout />}>
+              <Route path='/' element={<PrivateLayout _id={userData._id}/>}>
                 <Route path='' element={<Inicio />} />
                 <Route path='/usuarios' element={<IndexUsuarios />} />
                 <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
@@ -85,8 +82,7 @@ function App() {
                 <Route path='/proyectos/nuevo' element={<NuevoProyecto />} />
                 <Route path='/inscripciones' element={<IndexInscripciones />} />
                 <Route path='page2' element={<Page2 />} />
-                <Route path='category1' element={<IndexCategory1 />} />
-                <Route path='category1/page1' element={<Category1 />} />
+                <Route path='/infoUser/:_id' element={<IndexInfoUsuario />} />
               </Route>
               <Route path='/auth' element={<AuthLayout />}>
                 <Route path='register' element={<Register />} />

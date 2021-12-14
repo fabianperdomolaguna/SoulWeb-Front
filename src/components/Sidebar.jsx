@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from 'context/authContext';
 import PrivateComponent from './PrivateComponent';
 
-const SidebarLinks = () => {
+const SidebarLinks = (props) => {
   return (
     <div className='sidebar'>
       <Logo />
@@ -18,6 +18,7 @@ const SidebarLinks = () => {
         <SidebarRoute to='/inscripciones' title='Inscripciones' icon='fas fa-marker' />
       </PrivateComponent>
       <SidebarRoute to='/page2' title='Avances' icon='fas fa-tasks' />
+      <SidebarRoute to={`/infoUser/${props._id}`} title='Inf. Personal' icon='fas fa-info' />
       <Logout />
     </ul>    
     </div>
@@ -59,7 +60,7 @@ const Sidebar = (props) => {
       {/* Sidebar starts */}
 
         <div>
-          <SidebarLinks />
+          <SidebarLinks _id={props._id} />
         </div>
 
         <div>
