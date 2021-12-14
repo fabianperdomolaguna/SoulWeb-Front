@@ -5,3 +5,8 @@
   text-align: center;
   height: 100%;
 }
+
+.text-red{
+  color: red;
+  font-weight: bold;
+}

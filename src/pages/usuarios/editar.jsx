@@ -3,14 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USUARIO } from 'graphql/usuarios/queries';
 import Input from 'components/Input';
+import { useNavigate } from 'react-router';
 import ButtonLoading from 'components/ButtonLoading';
 import useFormData from 'hooks/useFormData';
 import { toast } from 'react-toastify';
 import { EDITAR_USUARIO } from 'graphql/usuarios/mutations';
 import DropDown from 'components/Dropdown';
-import { Enum_EstadoUsuario } from 'utils/enums';
+import { Enum_EstadoUsuario, Enum_Rol } from 'utils/enums';
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 
 const EditarUsuario = () => {
+
+  const navigate = useNavigate()
+
   const { form, formData, updateFormData } = useFormData(null);
   const { _id } = useParams();
 
@@ -28,10 +34,10 @@ const EditarUsuario = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    delete formData.rol;
     editarUsuario({
       variables: { _id, ...formData },
     });
+    navigate('/usuarios')
   };
 
   useEffect(() => {
@@ -53,12 +59,21 @@ const EditarUsuario = () => {
   if (queryLoading) return <div>Cargando....</div>;
 
   return (
-    <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-      <Link to='/usuarios'>
-        <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
-      </Link>
-      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Usuario</h1>
-      <form
+    <div className='showUserInfo'>
+      <Box bgcolor='rgba(255, 255, 255, 0.9)' height={590} width={370} justifyContent="center" 
+      alignItems="center" color='black' direction="row" display='flex' flexDirection='column'
+      sx={{ p: 2, border: '1px solid grey' }}>
+
+        <Typography
+          variant = 'h6'
+          color = 'textPrimary'
+          component = 'h2'
+          gutterBottom
+        >
+          Actualizacion de Datos
+        </Typography>
+
+        <form
         onSubmit={submitForm}
         onChange={updateFormData}
         ref={form}
@@ -99,13 +114,31 @@ const EditarUsuario = () => {
           required={true}
           options={Enum_EstadoUsuario}
         />
-        <span>Rol del usuario: {queryData.Usuario.rol}</span>
-        <ButtonLoading
-          disabled={Object.keys(formData).length === 0}
-          loading={mutationLoading}
-          text='Confirmar'
+        <DropDown
+          label='Rol de la persona(user):'
+          name='rol'
+          defaultValue={queryData.Usuario.rol}
+          required={true}
+          options={Enum_Rol}
         />
+
+        <button
+          class="btn btn-success mr-3"
+          onClick={submitForm}
+        >
+          Actualizar
+        </button>
+        <Link to='/usuarios'>
+          <button
+            class="btn btn-danger"
+          >
+            Cancelar
+          </button>
+        </Link>
+
       </form>
+
+      </Box>
     </div>
   );
 };

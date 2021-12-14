@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import 'styles/globals.css'
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USUARIOS } from 'graphql/usuarios/queries';
@@ -25,17 +26,7 @@ const IndexUsuarios = () => {
         <section class="content">
 
           <div class="container-fluid">
-            <h2>Datos de Usuario</h2>
-            <br/>
-            <div className="row d-flex align-items-center justify-content-center">
-              <div className="col-sm-1 align-text-bottom"><h5>Buscar:</h5></div>
-              <div className="col-sm-5">
-                <input id="busqueda" type="text" className="form-control" placeholder="Usuario"/>
-              </div>
-              <Link className="col" to='/'>
-                <button className="btn btn-success" type="button">Agregar Curso</button>
-              </Link>
-            </div>
+            <h2>Datos de Usuarios</h2>
           </div>
             
             <hr/>
@@ -55,6 +46,7 @@ const IndexUsuarios = () => {
               {data && data.Usuarios ? (
               <>
                 {data.Usuarios.map((user) => {
+                  if (Enum_EstadoUsuario[user.estado] == 'Pendiente'){
                   return (
                     <tr key={user._id}>
                       <td>{user.nombre}</td>
@@ -62,15 +54,30 @@ const IndexUsuarios = () => {
                       <td>{user.correo}</td>
                       <td>{user.identificacion}</td>
                       <td>{Enum_Rol[user.rol]}</td>
-                      <td>{Enum_EstadoUsuario[user.estado]}</td>
+                      <td className='text-red'>{Enum_EstadoUsuario[user.estado]}</td>
                       <td>
                         <Link to={`/usuarios/editar/${user._id}`}>
                           <i className='fas fa-edit' />
                         </Link>
                       </td>
                     </tr>
-                  );
-                  })}
+                  )} else{
+                    return (
+                      <tr key={user._id}>
+                        <td>{user.nombre}</td>
+                        <td>{user.apellido}</td>
+                        <td>{user.correo}</td>
+                        <td>{user.identificacion}</td>
+                        <td>{Enum_Rol[user.rol]}</td>
+                        <td>{Enum_EstadoUsuario[user.estado]}</td>
+                        <td>
+                          <Link to={`/usuarios/editar/${user._id}`}>
+                            <i className='fas fa-edit' />
+                          </Link>
+                        </td>
+                      </tr>
+                    )
+                  }})}
               </>
               ): (
                 <div>No autorizado</div>
