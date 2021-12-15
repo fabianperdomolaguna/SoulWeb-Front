@@ -80,9 +80,15 @@ const AccordionProyecto = ({ proyecto }) => {
           </PrivateComponent>
           <div>Liderado Por: {proyecto.lider.correo}</div>
           <div className='flex'>
-            {proyecto.objetivos.map((objetivo) => {
-              return <Objetivo tipo={objetivo.tipo} descripcion={objetivo.descripcion} />;
-            })}
+          {proyecto.objetivos.map((objetivo, index) => (
+              <Objetivo
+                index={index}
+                _id={objetivo._id}
+                idProyecto={proyecto._id}
+                tipo={objetivo.tipo}
+                descripcion={objetivo.descripcion}
+              />
+          ))}
           </div>
         </AccordionDetailsStyled>
       </AccordionStyled>
@@ -167,6 +173,7 @@ const InscripcionProyecto = ({ idProyecto, estado, inscripciones }) => {
 
   const confirmarInscripcion = () => {
     crearInscripcion({ variables: { proyecto: idProyecto, estudiante: userData._id } });
+    console.log(userData._id,idProyecto)
   };
 
   return (
