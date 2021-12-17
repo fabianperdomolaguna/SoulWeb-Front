@@ -18,6 +18,7 @@ import IndexProyectos from 'pages/proyectos/Index';
 import NuevoProyecto from 'pages/proyectos/NuevoProyecto';
 import IndexInscripciones from 'pages/inscripciones';
 import IndexInfoUsuario from 'pages/infoUsuarios';
+import IndexEstudiantes from 'pages/estudiantes/indexstudents';
 
 const httpLink = createHttpLink({
   uri: 'https://servidor-gql-soulweb.herokuapp.com/graphql',
@@ -78,6 +79,7 @@ function App() {
                 <Route path='' element={<Inicio />} />
                 <Route path='/usuarios' element={<IndexUsuarios />} />
                 <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
+                <Route path='/estudiantes' element={<IndexEstudiantes />} />
                 <Route path='/proyectos' element={<IndexProyectos />} />
                 <Route path='/proyectos/nuevo' element={<NuevoProyecto />} />
                 <Route path='/inscripciones' element={<IndexInscripciones />} />
