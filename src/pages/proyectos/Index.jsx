@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { CREAR_INSCRIPCION } from 'graphql/inscripciones/mutaciones';
 import { useUser } from 'context/userContext';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import {
   AccordionStyled,
   AccordionSummaryStyled,
@@ -19,6 +20,9 @@ import {
 } from 'components/Accordion';
 
 const IndexProyectos = () => {
+
+  const { _id } = useParams();
+
   const { data: queryData, loading, error } = useQuery(PROYECTOS);
 
   useEffect(() => {
@@ -37,6 +41,9 @@ const IndexProyectos = () => {
           <div className='my-2 self-end'>
             <button className='bg-indigo-500 text-gray-50 p-2 rounded-lg shadow-lg hover:bg-indigo-400'>
               <Link to='/proyectos/nuevo'>Crear nuevo proyecto</Link>
+            </button>
+            <button className='bg-indigo-500 text-gray-50 p-2 rounded-lg shadow-lg hover:bg-indigo-400'>
+              <Link to={`/proyectosliderados/${_id}`}>Ver Proyectos Liderados</Link>
             </button>
           </div>
         </PrivateComponent>
@@ -79,7 +86,11 @@ const AccordionProyecto = ({ proyecto }) => {
             />
           </PrivateComponent>
           <div>Liderado Por: {proyecto.lider.correo}</div>
+          <div>Prusupuesto = ${proyecto.presupuesto}</div>
+          <div>Fase = {proyecto.fase}</div>
+          <br/>
           <div className='flex'>
+          <h5>Objetivos</h5>
           {proyecto.objetivos.map((objetivo, index) => (
               <Objetivo
                 index={index}
@@ -88,6 +99,13 @@ const AccordionProyecto = ({ proyecto }) => {
                 tipo={objetivo.tipo}
                 descripcion={objetivo.descripcion}
               />
+          ))}
+          <h5>Avances</h5>
+          {proyecto.avances.map((avance) => (
+            <div className='mx-5 my-4 bg-gray-50 p-8 rounded-lg flex flex-col items-center justify-center shadow-xl'>
+              <div className='text-lg font-bold'>{avance.descripcion}</div>
+              <div>{avance.fecha}</div>
+            </div>
           ))}
           </div>
         </AccordionDetailsStyled>

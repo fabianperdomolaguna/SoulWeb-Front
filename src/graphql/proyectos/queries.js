@@ -6,9 +6,15 @@ const PROYECTOS = gql`
       _id
       nombre
       estado
+      fase
+      presupuesto
       objetivos {
         descripcion
         tipo
+      }
+      avances {
+        descripcion
+        fecha
       }
       lider {
         _id

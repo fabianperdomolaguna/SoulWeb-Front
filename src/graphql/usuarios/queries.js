@@ -41,4 +41,26 @@ query ConsultarEstudiantes {
 }
 `;
 
-export { GET_USUARIOS, GET_USUARIO, GET_ESTUDIANTES };
+const GET_PROYLIDER = gql`
+query ConsultarProyectosLiderados($_id: String!) {
+  consultarProyectosLiderados(_id: $_id) {
+    proyectosLiderados {
+      _id
+      nombre
+      estado
+      presupuesto
+      fase
+      objetivos {
+        tipo
+        descripcion
+      }
+      avances {
+        descripcion
+        fecha
+      }
+    }
+  }
+}
+`;
+
+export { GET_USUARIOS, GET_USUARIO, GET_ESTUDIANTES, GET_PROYLIDER };

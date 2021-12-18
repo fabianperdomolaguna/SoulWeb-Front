@@ -16,7 +16,7 @@ const SidebarLinks = (props) => {
       <PrivateComponent roleList={['LIDER']}>
         <SidebarRoute to='/estudiantes' title='Estudiantes' icon='fas fa-user-graduate' />
       </PrivateComponent>
-      <SidebarRoute to='/proyectos' title='Proyectos' icon='fas fa-project-diagram' />
+      <SidebarRoute to={`/proyectos/${props._id}`} title='Proyectos' icon='fas fa-project-diagram' />
       <PrivateComponent roleList={['ADMINISTRADOR', 'LIDER']}>
         <SidebarRoute to='/inscripciones' title='Inscripciones' icon='fas fa-marker' />
       </PrivateComponent>
