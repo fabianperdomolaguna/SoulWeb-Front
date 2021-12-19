@@ -6,6 +6,7 @@ import { Dialog } from '@mui/material';
 import { Enum_EstadoProyecto } from 'utils/enums';
 import ButtonLoading from 'components/ButtonLoading';
 import { EDITAR_PROYECTO } from 'graphql/proyectos/mutations';
+import { CAMBIO_DESCRIPCION } from 'graphql/avances/mutations';
 import useFormData from 'hooks/useFormData';
 import PrivateComponent from 'components/PrivateComponent';
 import { Link } from 'react-router-dom';
@@ -58,7 +59,37 @@ const IndexProyectos = () => {
 };
 
 const AccordionProyecto = ({ proyecto }) => {
+
   const [showDialog, setShowDialog] = useState(false);
+
+  const [editarAvance, { data: mutationData, loading: mutationLoading, error: mutationError }] =
+    useMutation(CAMBIO_DESCRIPCION);
+  
+  function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
+  const envio = _id => {
+    return event => {
+      event.preventDefault()
+
+      let message = window.prompt("Introduzca la nueva descripcion")
+      console.log(_id)
+
+      editarAvance({
+        variables: { _id, descripcion: message}
+      })
+
+      sleep(500)
+      
+      window.location.reload(true);
+    } 
+  };
+
   return (
     <>
       <AccordionStyled>
@@ -103,7 +134,11 @@ const AccordionProyecto = ({ proyecto }) => {
           <h5>Avances</h5>
           {proyecto.avances.map((avance) => (
             <div className='mx-5 my-4 bg-gray-50 p-8 rounded-lg flex flex-col items-center justify-center shadow-xl'>
-              <div className='text-lg font-bold'>{avance.descripcion}</div>
+              <div className='text-lg font-bold'>{avance.descripcion}
+              <button onClick={envio(avance._id)}>
+                <i className='fas fa-edit' />
+              </button>
+              </div>
               <div>{avance.fecha}</div>
             </div>
           ))}

@@ -13,6 +13,7 @@ const PROYECTOS = gql`
         tipo
       }
       avances {
+        _id
         descripcion
         fecha
       }
@@ -30,4 +31,17 @@ const PROYECTOS = gql`
   }
 `;
 
-export { PROYECTOS };
+const GET_PROYECTO = gql`
+query Proyecto($_id: String!) {
+  Proyecto(_id: $_id) {
+    nombre
+    presupuesto
+    objetivos {
+      tipo
+      descripcion
+    }
+  }
+}
+`;
+
+export { PROYECTOS, GET_PROYECTO };

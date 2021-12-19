@@ -55,8 +55,12 @@ query ConsultarProyectosLiderados($_id: String!) {
         descripcion
       }
       avances {
+        _id
         descripcion
         fecha
+        observaciones{
+          texto
+        }
       }
     }
   }
