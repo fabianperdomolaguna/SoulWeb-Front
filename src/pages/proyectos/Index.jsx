@@ -4,6 +4,7 @@ import { PROYECTOS } from 'graphql/proyectos/queries';
 import DropDown from 'components/Dropdown';
 import { Dialog } from '@mui/material';
 import { Enum_EstadoProyecto } from 'utils/enums';
+import { Enum_FaseProyecto } from 'utils/enums';
 import ButtonLoading from 'components/ButtonLoading';
 import { EDITAR_PROYECTO } from 'graphql/proyectos/mutations';
 import { CAMBIO_DESCRIPCION } from 'graphql/avances/mutations';
@@ -177,14 +178,17 @@ const FormEditProyecto = ({ _id }) => {
 
   return (
     <div className='p-4'>
-      <h1 className='font-bold'>Modificar Estado del Proyecto</h1>
+      <h1 className='font-bold'>Modificar Fase y/o Estado del Proyecto</h1>
       <form
         ref={form}
         onChange={updateFormData}
         onSubmit={submitForm}
+        default = {form}
         className='flex flex-col items-center'
       >
-        <DropDown label='Estado del Proyecto' name='estado' options={Enum_EstadoProyecto} />
+        <DropDown label='Fase del proyecto' name='fase' options={Enum_FaseProyecto} />
+        <DropDown label='Estado del Proyecto' name='estado' options={Enum_EstadoProyecto}  />
+        <br/>
         <ButtonLoading disabled={false} loading={loading} text='Confirmar' />
       </form>
     </div>
