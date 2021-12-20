@@ -47,6 +47,7 @@ jobs:
       
       - name: Pruebas
         run: npm test
+    needs: [build]
     
   deploy:
     runs-on: ubuntu-latest
